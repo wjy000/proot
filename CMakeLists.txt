@@ -1,0 +1,177 @@
+cmake_minimum_required(VERSION 3.24)
+project(proot C)
+
+set(CMAKE_C_STANDARD 11)
+
+include_directories(src)
+include_directories(src/cli)
+include_directories(src/execve)
+include_directories(src/extension)
+include_directories(src/extension/care)
+include_directories(src/extension/portmap)
+include_directories(src/loader)
+include_directories(src/path)
+include_directories(src/ptrace)
+include_directories(src/syscall)
+include_directories(src/tracee)
+include_directories(~/CLionProjects/linux-18.04-include/include)
+
+add_executable(proot
+        src/cli/care.c
+        src/cli/care.h
+        src/cli/cli.c
+        src/cli/cli.h
+        src/cli/note.c
+        src/cli/note.h
+        src/cli/proot.c
+        src/cli/proot.h
+        src/execve/aoxp.c
+        src/execve/aoxp.h
+        src/execve/auxv.c
+        src/execve/auxv.h
+        src/execve/elf.c
+        src/execve/elf.h
+        src/execve/enter.c
+        src/execve/execve.h
+        src/execve/exit.c
+        src/execve/ldso.c
+        src/execve/ldso.h
+        src/execve/shebang.c
+        src/execve/shebang.h
+        src/extension/care/archive.c
+        src/extension/care/archive.h
+        src/extension/care/care.c
+        src/extension/care/care.h
+        src/extension/care/extract.c
+        src/extension/care/extract.h
+        src/extension/care/final.c
+        src/extension/care/final.h
+        src/extension/fake_id0/fake_id0.c
+        src/extension/kompat/kompat.c
+        src/extension/link2symlink/link2symlink.c
+        src/extension/portmap/map.c
+        src/extension/portmap/portmap.c
+        src/extension/portmap/portmap.h
+        src/extension/python/proot.i
+        src/extension/python/python.c
+        src/extension/extension.c
+        src/extension/extension.h
+        src/loader/assembly-arm.h
+        src/loader/assembly-arm64.h
+        src/loader/assembly-x86.h
+        src/loader/assembly-x86_64.h
+        src/loader/loader.c
+        src/loader/script.h
+        src/path/binding.c
+        src/path/binding.h
+        src/path/canon.c
+        src/path/canon.h
+        src/path/glue.c
+        src/path/glue.h
+        src/path/path.c
+        src/path/path.h
+        src/path/proc.c
+        src/path/proc.h
+        src/path/temp.c
+        src/path/temp.h
+        src/ptrace/ptrace.c
+        src/ptrace/ptrace.h
+        src/ptrace/user.c
+        src/ptrace/user.h
+        src/ptrace/wait.c
+        src/ptrace/wait.h
+        src/syscall/chain.c
+        src/syscall/chain.h
+        src/syscall/enter.c
+        src/syscall/exit.c
+        src/syscall/heap.c
+        src/syscall/heap.h
+        src/syscall/rlimit.c
+        src/syscall/rlimit.h
+        src/syscall/seccomp.c
+        src/syscall/seccomp.h
+        src/syscall/socket.c
+        src/syscall/socket.h
+        src/syscall/syscall.c
+        src/syscall/syscall.h
+        src/syscall/sysnum.c
+        src/syscall/sysnum.h
+        src/syscall/sysnums-arm.h
+        src/syscall/sysnums-arm64.h
+        src/syscall/sysnums-i386.h
+        src/syscall/sysnums-sh4.h
+        src/syscall/sysnums-x32.h
+        src/syscall/sysnums-x86_64.h
+        src/tracee/abi.h
+        src/tracee/event.c
+        src/tracee/event.h
+        src/tracee/mem.c
+        src/tracee/mem.h
+        src/tracee/reg.c
+        src/tracee/reg.h
+        src/tracee/tracee.c
+        src/tracee/tracee.h
+        src/arch.h
+        src/attribute.h
+        src/build.h
+        src/compat.h
+        test/argv.c
+        test/argv0.c
+        test/cat.c
+        test/chdir_getcwd.c
+        test/chroot.c
+        test/echo.c
+        test/exec.c
+        test/false.c
+        test/fchdir_getcwd.c
+        test/fork-wait.c
+        test/gdb-ptrace-test-signal.c
+        test/gdb-ptrace-test.c
+        test/getresgid.c
+        test/getresuid.c
+        test/ptrace-2.c
+        test/ptrace-3.c
+        test/ptrace.c
+        test/puts_proc_self_exe.c
+        test/pwd.c
+        test/readdir.c
+        test/readlink.c
+        test/symlink.c
+        test/test-0cf405b0.c
+        test/test-16573e73.c
+        test/test-1c68c218.c
+        test/test-1ffc8309.c
+        test/test-25069c12.c
+        test/test-25069c13.c
+        test/test-305ae31d.c
+        test/test-33333333.c
+        test/test-33333334.c
+        test/test-44444444.c
+        test/test-51943658.c
+        test/test-5bed7141.c
+        test/test-5bed7143.c
+        test/test-66666666.c
+        test/test-79cf6614.c
+        test/test-82ba4ba1.c
+        test/test-88888888.c
+        test/test-9c07fad8.c
+        test/test-a8e69d6f.c
+        test/test-af062114.c
+        test/test-bdc90417.c
+        test/test-bug-138.c
+        test/test-c10e2073.c
+        test/test-c5a7a0f0.c
+        test/test-d2175fc4.c
+        test/test-e87b34ae.c
+        test/test-fa205b56.c
+        test/test-fdf487a0.c
+        test/test-iiiiiiii.c
+        test/test-kkkkkkkk.c
+        test/test-nnnnnnnn.c
+        test/test-oooooooo.c
+        test/test-ptrace00.c
+        test/test-ptrace01.c
+        test/test-ssssssss.c
+        test/test-sysexit.c
+        test/test-xxxxxxxx.c
+        test/true.c)
