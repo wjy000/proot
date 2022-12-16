@@ -1,9 +1,7 @@
-*.d
 *.gcda
 *.gcno
 *.html
 *.info
-*.o
 *.1
 doc/*.h
 *rpm-spec
